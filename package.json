@@ -1,0 +1,12 @@
+{
+  "name": "Pick4Me",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Codeofsanju/Pick4Me.git",
+  "author": "Codeofsanju <sanjeev.sharma90@myhunter.cuny.edu>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-preset-env": "1.5.2",
+    "babel-preset-react": "6.24.1"
+  }
+}
