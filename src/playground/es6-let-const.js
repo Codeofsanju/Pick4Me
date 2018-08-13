@@ -1,11 +1,19 @@
+// VAR
 var nameVar = 'Sanjeev Sharma';
+var nameVar = 'SanjeevNew'; // redefinable 
+nameVar= 'Sanjeev Reassigned'; // reassignable
 console.log('nameVar', nameVar);
 
+// LET
 let nameLet = 'Jen';
-nameLet = 'Sander';
+//let nameLet = 'JenNew'; not redefinable 
+nameLet = 'Sander'; // reassignable
 console.log('nameLet', nameLet);
 
+// CONST
 const nameConst = 'Sanju';
 //const nameConst = 'Sanjunew'; not redifinable
-nameConst = 'Sanjunew'; 
+//nameConst = 'Sanjunew'; not reassignable
 console.log('nameConst', nameConst);
+
+
