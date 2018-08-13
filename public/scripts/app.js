@@ -31,13 +31,13 @@ console.log(squareArrowExp(11));
 // Create second arrow function to do same using expression syntax
 
 // PART I: Regular arrow syntax
-var getFirstName = function getFirstName(fullName) {
+var getFirstName = function getFirstName(x) {
     return x.split(' ')[0];
 };
 console.log('RegFname: ', getFirstName('Sanjeev Sharma'));
 
 // PART II: Expression syntax
-var getFirstNameExp = function getFirstNameExp(fullName) {
+var getFirstNameExp = function getFirstNameExp(x) {
     return x.split(' ')[0];
 };
 console.log('ExpFname: ', getFirstNameExp('Sanjeev Sharma'));

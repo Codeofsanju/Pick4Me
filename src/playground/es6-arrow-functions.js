@@ -27,11 +27,11 @@ console.log(squareArrowExp(11));
 // Create second arrow function to do same using expression syntax
 
 // PART I: Regular arrow syntax
-const getFirstName = (fullName) => {
+const getFirstName = (x) => {
     return x.split(' ')[0];
 };
 console.log('RegFname: ', getFirstName('Sanjeev Sharma'));
 
 // PART II: Expression syntax
-const getFirstNameExp = (fullName) => x.split(' ')[0];
+const getFirstNameExp = (x) => x.split(' ')[0];
 console.log('ExpFname: ', getFirstNameExp('Sanjeev Sharma'));
