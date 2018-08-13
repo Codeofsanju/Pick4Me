@@ -1,85 +1,43 @@
 'use strict';
 
-console.log('App.js is running');
-
-var app = {
-    title: 'Pick4me!',
-    subtitle: 'We pick for you :)',
-    options: ['one', 'two']
+// es5 function
+var square = function square(x) {
+    return x * x;
 };
+console.log(square(8));
 
-//JSX - JavasScript XML
-var template = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        app.title
-    ),
-    app.subtitle && React.createElement(
-        'p',
-        null,
-        app.subtitle
-    ),
-    React.createElement(
-        'p',
-        null,
-        ' ',
-        app.options.length > 0 ? 'Here are your options: ' + app.options : 'There are no options',
-        ' '
-    ),
-    React.createElement(
-        'ol',
-        null,
-        React.createElement(
-            'li',
-            null,
-            ' Item one '
-        ),
-        React.createElement(
-            'li',
-            null,
-            ' Item two '
-        )
-    )
-);
-
-var user = {
-    userName: 'Sanjeev Sharma',
-    userAge: 25,
-    userLocation: 'NYC'
+// named es5 function
+function squareNamed(x) {
+    return x * x;
 };
+console.log(squareNamed(9));
 
-function getLocation(location) {
-    if (location) {
-        // if location does exist
-        return React.createElement(
-            'p',
-            null,
-            'Location: ',
-            location,
-            ' '
-        );
-    }
-}
-var templateTwo = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        user.userName ? user.userName : 'Anonymous'
-    ),
-    user.userAge && user.userAge >= 18 && React.createElement(
-        'p',
-        null,
-        'Age: ',
-        user.userAge
-    ),
-    getLocation(user.userLocation)
-);
+// es6 arrow function
+var squareArrow = function squareArrow(x) {
+    // notice that the function name is now anonymous, so you cannot define a function by name and you must use variable
+    return x * x;
+};
+console.log(squareArrow(10));
 
-var appRoot = document.getElementById('app');
+//arrow function expression syntax 
+var squareArrowExp = function squareArrowExp(x) {
+    return x * x;
+};
+console.log(squareArrowExp(11));
 
-ReactDOM.render(template, appRoot);
+// Challenge - Use arrow functions
+// getFirstName('Sanjeev Sharma') -> Sanjeev
+// Create regular arrow function
+// Create second arrow function to do same using expression syntax
+
+// PART I: Regular arrow syntax
+var getFirstName = function getFirstName(fullName) {
+    return x.split(' ')[0];
+};
+console.log('RegFname: ', getFirstName('Sanjeev Sharma'));
+
+// PART II: Expression syntax
+var getFirstNameExp = function getFirstNameExp(fullName) {
+    return x.split(' ')[0];
+};
+console.log('ExpFname: ', getFirstNameExp('Sanjeev Sharma'));
