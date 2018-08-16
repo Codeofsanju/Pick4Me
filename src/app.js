@@ -41,18 +41,30 @@ const templateTwo = (
 // Setup reset button
 let count1 = 10;
 let initial = count1;
-const minus = () => console.log('minus');
-const reset = () => console.log('reset');
-const templateThree = (
-    <div>
-        <h1> Count: {count1} </h1>
-        <button onClick= {add1} className="button"> +1 </button>
-        <button onClick = {minus} className="button"> -1 </button>
-        <button onClick = {reset} className="button"> reset </button>
-    </div>
-);
+const add2 = () => {
+    count1++;
+    renderCounterApp();
+};
+const minus = () => {
+    count1--;
+    renderCounterApp();
+};
+const reset = () => {
+    count1 = initial;
+    renderCounterApp();
+};
 
-
+const renderCounterApp = () =>{
+    const templateThree = (
+        <div>
+            <h1> Count: {count1} </h1>
+            <button onClick= {add2} className="button"> +1 </button>
+            <button onClick = {minus} className="button"> -1 </button>
+            <button onClick = {reset} className="button"> reset </button>
+        </div>
+    );
+    ReactDOM.render(templateThree, appRoot);
+};
 const appRoot = document.getElementById('app');
+renderCounterApp();
 
-ReactDOM.render(templateThree, appRoot);

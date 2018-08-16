@@ -74,39 +74,47 @@ var templateTwo = React.createElement(
 // Setup reset button
 var count1 = 10;
 var initial = count1;
+var add2 = function add2() {
+    count1++;
+    renderCounterApp();
+};
 var minus = function minus() {
-    return console.log('minus');
+    count1--;
+    renderCounterApp();
 };
 var reset = function reset() {
-    return console.log('reset');
+    count1 = initial;
+    renderCounterApp();
 };
-var templateThree = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
+
+var renderCounterApp = function renderCounterApp() {
+    var templateThree = React.createElement(
+        'div',
         null,
-        ' Count: ',
-        count1,
-        ' '
-    ),
-    React.createElement(
-        'button',
-        { onClick: add1, className: 'button' },
-        ' +1 '
-    ),
-    React.createElement(
-        'button',
-        { onClick: minus, className: 'button' },
-        ' -1 '
-    ),
-    React.createElement(
-        'button',
-        { onClick: reset, className: 'button' },
-        ' reset '
-    )
-);
-
+        React.createElement(
+            'h1',
+            null,
+            ' Count: ',
+            count1,
+            ' '
+        ),
+        React.createElement(
+            'button',
+            { onClick: add2, className: 'button' },
+            ' +1 '
+        ),
+        React.createElement(
+            'button',
+            { onClick: minus, className: 'button' },
+            ' -1 '
+        ),
+        React.createElement(
+            'button',
+            { onClick: reset, className: 'button' },
+            ' reset '
+        )
+    );
+    ReactDOM.render(templateThree, appRoot);
+};
 var appRoot = document.getElementById('app');
-
-ReactDOM.render(templateThree, appRoot);
+renderCounterApp();
