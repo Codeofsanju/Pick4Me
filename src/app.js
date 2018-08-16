@@ -22,27 +22,37 @@ const template = (
 );
 
 
-
-
-const user = {
-    userName: 'Sanjeev Sharma',
-    userAge: 25,
-    userLocation: 'NYC'
+// EVENTS AND EVENT HANDLERS
+let count = 0;
+const add1 = () => {
+    console.log('add1');
 };
 
-function getLocation(location){
-    if (location) { // if location does exist
-        return <p>Location: {location} </p>;
-    }
-}
 const templateTwo = (
     <div>
-        <h1>{user.userName ? user.userName : 'Anonymous'}</h1>
-        {(user.userAge && user.userAge >= 18) && <p>Age: {user.userAge}</p>}
-        {getLocation(user.userLocation)}
+        <h1> Count: {count} </h1>
+        <button onClick={add1} className="button"> +1 </button>
     </div>
 );
 
+// Events Challenge 1
+// Make a button with the text -1. Only console.log for now.
+// Setup minusOne functions
+// Setup reset button
+let count1 = 10;
+let initial = count1;
+const minus = () => console.log('minus');
+const reset = () => console.log('reset');
+const templateThree = (
+    <div>
+        <h1> Count: {count1} </h1>
+        <button onClick= {add1} className="button"> +1 </button>
+        <button onClick = {minus} className="button"> -1 </button>
+        <button onClick = {reset} className="button"> reset </button>
+    </div>
+);
+
+
 const appRoot = document.getElementById('app');
 
-ReactDOM.render(template, appRoot);
+ReactDOM.render(templateThree, appRoot);
