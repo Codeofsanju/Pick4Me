@@ -44,7 +44,7 @@ const user2 = { //using map
     name2: 'Sanjeev2',
     cities2: ['NYC', 'Queens', 'Miami'],
     printPlaceLived(){
-        return this.cities2.map((city)=> this.name2 + ' has lived in ' + city); //map allow you to transform each item in the arry and get a new array back
+        return this.cities2.map((city)=> this.name2 + ' has lived in ' + city); //map allow you to transform each item in the array and get a new array back
     }
 };
 console.log(user2.printPlaceLived());
