@@ -26,6 +26,12 @@ var clearList = function clearList() {
     renderApp();
 };
 
+var makeDecision = function makeDecision() {
+    var randomIndex = Math.floor(Math.random() * app.options.length);
+    var option = app.options[randomIndex];
+    alert(option);
+};
+
 //JSX - JavasScript XML
 var renderApp = function renderApp() {
     var template = React.createElement(
@@ -54,6 +60,11 @@ var renderApp = function renderApp() {
             ' ',
             app.options.length,
             ' '
+        ),
+        React.createElement(
+            'button',
+            { disabled: app.options.length == 0, onClick: makeDecision, className: 'button' },
+            ' Pick4me '
         ),
         React.createElement(
             'button',

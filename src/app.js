@@ -24,7 +24,11 @@ const clearList = () => {
     renderApp();
 };
 
-
+const makeDecision = () =>{    
+    const randomIndex = Math.floor(Math.random() * app.options.length);
+    const option = app.options[randomIndex];
+    alert(option);
+};
 
 //JSX - JavasScript XML
 const renderApp = () => {
@@ -34,12 +38,11 @@ const renderApp = () => {
             {app.subtitle && <p>{app.subtitle}</p>}   
             <p> {app.options.length > 0 ?'Here are your options: ' + app.options : 'There are no options'} </p>
             <p> {app.options.length} </p>
+            <button disabled={app.options.length == 0} onClick = {makeDecision} className = "button"> Pick4me </button>
             <button onClick = {clearList} className = "button"> Remove All </button>
             <ol> 
                 {
-                    app.options.map((option) => {
-                        return <li key = {option}> {option} </li>
-                    })
+                    app.options.map((option) => <li key = {option}> {option} </li>)
                 }
             </ol>
             <form onSubmit={onFormSubmit}> {/* reference the function, do not call it.*/ }
