@@ -1,102 +1,64 @@
 'use strict';
 
-console.log('App.js is running');
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var app = {
-    title: 'Pick4me!',
-    subtitle: 'We pick for you :)',
-    options: []
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var onFormSubmit = function onFormSubmit(e) {
-    // e = event object: contains various information about the event object
-    e.preventDefault(); // stops full page refresh
+var Person = function () {
+    function Person(name) /*argument default value*/{
+        var location = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Not Given';
 
-    var option = e.target.elements.option.value; // grab user submitted option from form
-    if (option) {
-        // check if option is populated
-        app.options.push(option); // push to options vector
-        e.target.elements.option.value = ''; // empty form text field
-        renderApp(); // re-render app
+        _classCallCheck(this, Person);
+
+        this.name = name;
+        this.location = location;
     }
-};
 
-var clearList = function clearList() {
-    app.options = [];
-    renderApp();
-};
+    _createClass(Person, [{
+        key: 'getGreeting',
+        value: function getGreeting() {
+            // class method
+            //return 'Hi ' + this.name;
+            return 'Hi ' + this.name; // ES6 template string using back ticks
+        }
+    }]);
 
-var makeDecision = function makeDecision() {
-    var randomIndex = Math.floor(Math.random() * app.options.length);
-    var option = app.options[randomIndex];
-    alert(option);
-};
+    return Person;
+}();
 
-//JSX - JavasScript XML
-var renderApp = function renderApp() {
-    var template = React.createElement(
-        'div',
-        null,
-        React.createElement(
-            'h1',
-            null,
-            app.title
-        ),
-        app.subtitle && React.createElement(
-            'p',
-            null,
-            app.subtitle
-        ),
-        React.createElement(
-            'p',
-            null,
-            ' ',
-            app.options.length > 0 ? 'Here are your options: ' + app.options : 'There are no options',
-            ' '
-        ),
-        React.createElement(
-            'p',
-            null,
-            ' ',
-            app.options.length,
-            ' '
-        ),
-        React.createElement(
-            'button',
-            { disabled: app.options.length == 0, onClick: makeDecision, className: 'button' },
-            ' Pick4me '
-        ),
-        React.createElement(
-            'button',
-            { onClick: clearList, className: 'button' },
-            ' Remove All '
-        ),
-        React.createElement(
-            'ol',
-            null,
-            app.options.map(function (option) {
-                return React.createElement(
-                    'li',
-                    { key: option },
-                    ' ',
-                    option,
-                    ' '
-                );
-            })
-        ),
-        React.createElement(
-            'form',
-            { onSubmit: onFormSubmit },
-            ' ',
-            React.createElement('input', { type: 'text', name: 'option' }),
-            React.createElement(
-                'button',
-                null,
-                ' Add options '
-            )
-        )
-    );
-    ReactDOM.render(template, appRoot);
-};
-var appRoot = document.getElementById('app');
-renderApp();
+var me = new Person('Sanjeev Sharma', 'NYC');
+var someone = new Person('Random');
+
+console.log(me.getGreeting()); // calling class instances function
+console.log(someone);
+
+//CHALLENGE
+//Setup another constructor that takes two arguments, name and age (default to 0)
+//Setup class method getDescription - name is (age) years old.
+
+var Challenge = function () {
+    function Challenge() {
+        var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'anonymous';
+        var age = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+        _classCallCheck(this, Challenge);
+
+        this.name = name;
+        this.age = age;
+    }
+
+    _createClass(Challenge, [{
+        key: 'getDescription',
+        value: function getDescription() {
+            return this.name + ' is ' + this.age + ' years old';
+        }
+    }]);
+
+    return Challenge;
+}();
+
+var challengePerson = new Challenge('Challenging Bill', 45);
+var challengePersonNoAge = new Challenge('Challenging Bill2');
+
+console.log(challengePerson.getDescription());
+console.log(challengePersonNoAge.getDescription());
