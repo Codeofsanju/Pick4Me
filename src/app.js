@@ -1,3 +1,16 @@
+class Pick4MeApp extends React.Component {
+    render() {
+        return (
+            <div>
+                <Header />
+                <Action />
+                <Option />
+                <AddOptions />
+            </div>
+        );
+    }
+}
+
 class Header extends React.Component { // must use uppercase for class name
     render(){// required to be defined in react components
         return (
@@ -25,6 +38,16 @@ class Option extends React.Component {
         return(
             <div>
                 <h1> This is Options Component </h1>
+                <Options />
+            </div>
+        );
+    }
+}
+class Options extends React.Component{
+    render(){
+        return(
+            <div>
+                <p> Option Component here </p>
             </div>
         );
     }
@@ -44,13 +67,5 @@ class AddOptions extends React.Component {
     }
 }
 
-const jsx = (
-    <div>
-        <Header />
-        <Action />
-        <Option />
-        <AddOptions />
-    </div>
-)
 
-ReactDOM.render(jsx, document.getElementById("app"));
+ReactDOM.render(<Pick4MeApp />, document.getElementById("app"));
