@@ -1,59 +1,56 @@
-console.log('App.js is running');
+class Header extends React.Component { // must use uppercase for class name
+    render(){// required to be defined in react components
+        return (
+            <div>
+                <h1> Pick4Me </h1>
+                <h2> Let Us Choose! </h2>
+            </div>
+        );
+    } 
+}
 
-
-const app = {
-    title: 'Pick4me!',
-    subtitle: 'We pick for you :)',
-    options: [],
-};
-
-
-const onFormSubmit = (e) => { // e = event object: contains various information about the event object
-    e.preventDefault(); // stops full page refresh
-    
-    const option = e.target.elements.option.value; // grab user submitted option from form
-    if(option){ // check if option is populated
-        app.options.push(option); // push to options vector
-        e.target.elements.option.value = ''; // empty form text field
-        renderApp(); // re-render app
+class Action extends React.Component {
+    render(){
+        return (
+            <div>
+                <button> What Should I do? </button>
+            </div>
+        );
     }
-};
+}
 
-const clearList = () => {
-    app.options = [];
-    renderApp();
-};
+// CHALLENGE: create options component 
+class Option extends React.Component {
+    render () {
+        return(
+            <div>
+                <h1> This is Options Component </h1>
+            </div>
+        );
+    }
+}
 
-const makeDecision = () =>{    
-    const randomIndex = Math.floor(Math.random() * app.options.length);
-    const option = app.options[randomIndex];
-    alert(option);
-};
+// AddOptions
+class AddOptions extends React.Component {
+    render(){
+        return (
+            <div>
+                <ol>
+                    <li> Item 1 </li>
+                    <li> Item 2 </li>
+                </ol>
+            </div>
+        );
+    }
+}
 
-//JSX - JavasScript XML
-const renderApp = () => {
-    const template = (
-        <div>
-            <h1>{app.title}</h1> 
-            {app.subtitle && <p>{app.subtitle}</p>}   
-            <p> {app.options.length > 0 ?'Here are your options: ' + app.options : 'There are no options'} </p>
-            <p> {app.options.length} </p>
-            <button disabled={app.options.length == 0} onClick = {makeDecision} className = "button"> Pick4me </button>
-            <button onClick = {clearList} className = "button"> Remove All </button>
-            <ol> 
-                {
-                    app.options.map((option) => <li key = {option}> {option} </li>)
-                }
-            </ol>
-            <form onSubmit={onFormSubmit}> {/* reference the function, do not call it.*/ }
-                <input type="text" name="option"/>
-                <button> Add options </button>
-            </form>
-        </div>
-    );
-    ReactDOM.render(template, appRoot);
-};
-const appRoot = document.getElementById('app');
-renderApp();
+const jsx = (
+    <div>
+        <Header />
+        <Action />
+        <Option />
+        <AddOptions />
+    </div>
+)
 
-
+ReactDOM.render(jsx, document.getElementById("app"));
