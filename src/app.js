@@ -58,7 +58,7 @@ class Option extends React.Component{
     render(){
         return(
             <div>
-                <p key = {this.props.option}> Option: {this.props.optionText} </p>
+                <p key = {this.props.option}> Option: {this.props.optionText} </p> 
             </div>
         );
     }
