@@ -117,3 +117,63 @@ var student2 = new Student('Abinav Sharma', 27, 'Computer Science');
 console.log(student2.getDescription());
 console.log(student2.getMajor());
 console.log(student2.hasMajor());
+
+// CHALLENGE 2: Create a new class for Person2 and subclass of Person2 called traveler. 
+// Add support for homeLocation
+// getGreeting() function in parent class. Overide this function in the subclass:
+//  -> Hi. I am Andrew Mead. (only if location is not present) +  I'm Visiting from location. (if there is a location)
+
+var Person2 = function () {
+    function Person2(name, age) {
+        _classCallCheck(this, Person2);
+
+        this.name = name;
+        this.age = age;
+    }
+
+    _createClass(Person2, [{
+        key: 'getGreeting',
+        value: function getGreeting() {
+            return 'Hi. I am ' + this.name + '. ';
+        }
+    }]);
+
+    return Person2;
+}();
+
+var Traveler = function (_Person) {
+    _inherits(Traveler, _Person);
+
+    function Traveler(name, age, location) {
+        _classCallCheck(this, Traveler);
+
+        var _this2 = _possibleConstructorReturn(this, (Traveler.__proto__ || Object.getPrototypeOf(Traveler)).call(this, name, age));
+
+        _this2.location = location;
+        return _this2;
+    }
+
+    _createClass(Traveler, [{
+        key: 'homeLocation',
+        value: function homeLocation() {
+            return !!this.location;
+        }
+    }, {
+        key: 'getGreeting',
+        value: function getGreeting() {
+            var greeting = _get(Traveler.prototype.__proto__ || Object.getPrototypeOf(Traveler.prototype), 'getGreeting', this).call(this);
+            if (this.homeLocation()) {
+                return greeting + ('I\'m visting from ' + this.location + '.');
+            }
+            return greeting;
+        }
+    }]);
+
+    return Traveler;
+}(Person2);
+
+var traveler = new Traveler('Akshay', 25);
+console.log(traveler.getGreeting());
+
+var traveler1 = new Traveler('Akshay Abroad', 25, 'NYC');
+console.log(traveler1.getGreeting());
