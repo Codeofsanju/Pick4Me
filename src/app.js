@@ -1,10 +1,13 @@
 class Pick4MeApp extends React.Component {
     render() {
+    const t1 = 'Pick4Me';
+    const st1 = 'Let Us Choose!';
+    const optns = ['Thing one', 'Thing two', 'Thing three'];
         return (
             <div>
-                <Header />
+                <Header title = {t1} subtitle = {st1}/>
                 <Action />
-                <Option />
+                <Options options = {optns}/>
                 <AddOptions />
             </div>
         );
@@ -15,8 +18,8 @@ class Header extends React.Component { // must use uppercase for class name
     render(){// required to be defined in react components
         return (
             <div>
-                <h1> Pick4Me </h1>
-                <h2> Let Us Choose! </h2>
+                <h1> {this.props.title} </h1>
+                <h2> {this.props.subtitle} </h2>
             </div>
         );
     } 
@@ -32,22 +35,30 @@ class Action extends React.Component {
     }
 }
 
-// CHALLENGE: create options component 
-class Option extends React.Component {
+// CHALLENGE1: create options component 
+class Options extends React.Component {
     render () {
         return(
             <div>
-                <h1> This is Options Component </h1>
-                <Options />
+                {
+                    this.props.options.map((option) => <Option key ={option} optionText = {option} />)
+                }
+                <Option />
             </div>
         );
     }
 }
-class Options extends React.Component{
+
+// Challenge 2: Setup options prop for Options component.
+// Render length of array.
+
+
+
+class Option extends React.Component{
     render(){
         return(
             <div>
-                <p> Option Component here </p>
+                <p key = {this.props.option}> Option: {this.props.optionText} </p>
             </div>
         );
     }

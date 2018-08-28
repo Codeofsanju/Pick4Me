@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -18,14 +18,17 @@ var Pick4MeApp = function (_React$Component) {
     }
 
     _createClass(Pick4MeApp, [{
-        key: "render",
+        key: 'render',
         value: function render() {
+            var t1 = 'Pick4Me';
+            var st1 = 'Let Us Choose!';
+            var optns = ['Thing one', 'Thing two', 'Thing three'];
             return React.createElement(
-                "div",
+                'div',
                 null,
-                React.createElement(Header, null),
+                React.createElement(Header, { title: t1, subtitle: st1 }),
                 React.createElement(Action, null),
-                React.createElement(Option, null),
+                React.createElement(Options, { options: optns }),
                 React.createElement(AddOptions, null)
             );
         }
@@ -44,22 +47,26 @@ var Header = function (_React$Component2) {
     }
 
     _createClass(Header, [{
-        key: "render",
+        key: 'render',
         // must use uppercase for class name
         value: function render() {
             // required to be defined in react components
             return React.createElement(
-                "div",
+                'div',
                 null,
                 React.createElement(
-                    "h1",
+                    'h1',
                     null,
-                    " Pick4Me "
+                    ' ',
+                    this.props.title,
+                    ' '
                 ),
                 React.createElement(
-                    "h2",
+                    'h2',
                     null,
-                    " Let Us Choose! "
+                    ' ',
+                    this.props.subtitle,
+                    ' '
                 )
             );
         }
@@ -78,15 +85,15 @@ var Action = function (_React$Component3) {
     }
 
     _createClass(Action, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "div",
+                'div',
                 null,
                 React.createElement(
-                    "button",
+                    'button',
                     null,
-                    " What Should I do? "
+                    ' What Should I do? '
                 )
             );
         }
@@ -95,39 +102,11 @@ var Action = function (_React$Component3) {
     return Action;
 }(React.Component);
 
-// CHALLENGE: create options component 
+// CHALLENGE1: create options component 
 
 
-var Option = function (_React$Component4) {
-    _inherits(Option, _React$Component4);
-
-    function Option() {
-        _classCallCheck(this, Option);
-
-        return _possibleConstructorReturn(this, (Option.__proto__ || Object.getPrototypeOf(Option)).apply(this, arguments));
-    }
-
-    _createClass(Option, [{
-        key: "render",
-        value: function render() {
-            return React.createElement(
-                "div",
-                null,
-                React.createElement(
-                    "h1",
-                    null,
-                    " This is Options Component "
-                ),
-                React.createElement(Options, null)
-            );
-        }
-    }]);
-
-    return Option;
-}(React.Component);
-
-var Options = function (_React$Component5) {
-    _inherits(Options, _React$Component5);
+var Options = function (_React$Component4) {
+    _inherits(Options, _React$Component4);
 
     function Options() {
         _classCallCheck(this, Options);
@@ -136,21 +115,53 @@ var Options = function (_React$Component5) {
     }
 
     _createClass(Options, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "div",
+                'div',
                 null,
-                React.createElement(
-                    "p",
-                    null,
-                    " Option Component here "
-                )
+                this.props.options.map(function (option) {
+                    return React.createElement(Option, { key: option, optionText: option });
+                }),
+                React.createElement(Option, null)
             );
         }
     }]);
 
     return Options;
+}(React.Component);
+
+// Challenge 2: Setup options prop for Options component.
+// Render length of array.
+
+
+var Option = function (_React$Component5) {
+    _inherits(Option, _React$Component5);
+
+    function Option() {
+        _classCallCheck(this, Option);
+
+        return _possibleConstructorReturn(this, (Option.__proto__ || Object.getPrototypeOf(Option)).apply(this, arguments));
+    }
+
+    _createClass(Option, [{
+        key: 'render',
+        value: function render() {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'p',
+                    { key: this.props.option },
+                    ' Option: ',
+                    this.props.optionText,
+                    ' '
+                )
+            );
+        }
+    }]);
+
+    return Option;
 }(React.Component);
 
 // AddOptions
@@ -166,23 +177,23 @@ var AddOptions = function (_React$Component6) {
     }
 
     _createClass(AddOptions, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "div",
+                'div',
                 null,
                 React.createElement(
-                    "ol",
+                    'ol',
                     null,
                     React.createElement(
-                        "li",
+                        'li',
                         null,
-                        " Item 1 "
+                        ' Item 1 '
                     ),
                     React.createElement(
-                        "li",
+                        'li',
                         null,
-                        " Item 2 "
+                        ' Item 2 '
                     )
                 )
             );
