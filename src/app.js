@@ -26,20 +26,29 @@ class Header extends React.Component { // must use uppercase for class name
 }
 
 class Action extends React.Component {
+    handlePick(){
+        alert('clicked');
+    }
+
     render(){
         return (
             <div>
-                <button> What Should I do? </button>
+                <button onClick={this.handlePick}> What Should I do? </button>
             </div>
         );
     }
 }
 
 // CHALLENGE1: create options component 
+// EVENTS AND METHODS CHALLENGE: Add remove all button and then setup handleRemoveAll
 class Options extends React.Component {
+    handleRemoveAll(){
+        alert('removed');
+    }
     render () {
         return(
             <div>
+            <button onClick = {this.handleRemoveAll}> Remove All </button>
                 {
                     this.props.options.map((option) => <Option key ={option} optionText = {option} />)
                 }
@@ -48,6 +57,8 @@ class Options extends React.Component {
         );
     }
 }
+
+
 
 // Challenge 2: Setup options prop for Options component.
 // Render length of array.
@@ -66,13 +77,22 @@ class Option extends React.Component{
 
 // AddOptions
 class AddOptions extends React.Component {
+    handleFormSubmit(e){ // add to options vector
+        e.preventDefault();
+        const option = e.target.elements.option.value.trim(); // .trim() removes all leading and ending whitespace. 
+        console.log(option);
+        if(option){
+            alert(option);
+        }
+    }
+
     render(){
         return (
             <div>
-                <ol>
-                    <li> Item 1 </li>
-                    <li> Item 2 </li>
-                </ol>
+                <form onSubmit = {this.handleFormSubmit}>
+                    <input type = 'text' name = "option"/>
+                    <button> Add Option </button>
+                </form>
             </div>
         );
     }

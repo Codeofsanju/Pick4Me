@@ -85,6 +85,11 @@ var Action = function (_React$Component3) {
     }
 
     _createClass(Action, [{
+        key: 'handlePick',
+        value: function handlePick() {
+            alert('clicked');
+        }
+    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
@@ -92,7 +97,7 @@ var Action = function (_React$Component3) {
                 null,
                 React.createElement(
                     'button',
-                    null,
+                    { onClick: this.handlePick },
                     ' What Should I do? '
                 )
             );
@@ -103,6 +108,7 @@ var Action = function (_React$Component3) {
 }(React.Component);
 
 // CHALLENGE1: create options component 
+// EVENTS AND METHODS CHALLENGE: Add remove all button and then setup handleRemoveAll
 
 
 var Options = function (_React$Component4) {
@@ -115,11 +121,21 @@ var Options = function (_React$Component4) {
     }
 
     _createClass(Options, [{
+        key: 'handleRemoveAll',
+        value: function handleRemoveAll() {
+            alert('removed');
+        }
+    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
                 'div',
                 null,
+                React.createElement(
+                    'button',
+                    { onClick: this.handleRemoveAll },
+                    ' Remove All '
+                ),
                 this.props.options.map(function (option) {
                     return React.createElement(Option, { key: option, optionText: option });
                 }),
@@ -177,23 +193,30 @@ var AddOptions = function (_React$Component6) {
     }
 
     _createClass(AddOptions, [{
+        key: 'handleFormSubmit',
+        value: function handleFormSubmit(e) {
+            // add to options vector
+            e.preventDefault();
+            var option = e.target.elements.option.value.trim(); // .trim() removes all leading and ending whitespace. 
+            console.log(option);
+            if (option) {
+                alert(option);
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
                 'div',
                 null,
                 React.createElement(
-                    'ol',
-                    null,
+                    'form',
+                    { onSubmit: this.handleFormSubmit },
+                    React.createElement('input', { type: 'text', name: 'option' }),
                     React.createElement(
-                        'li',
+                        'button',
                         null,
-                        ' Item 1 '
-                    ),
-                    React.createElement(
-                        'li',
-                        null,
-                        ' Item 2 '
+                        ' Add Option '
                     )
                 )
             );
