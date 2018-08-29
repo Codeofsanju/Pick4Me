@@ -42,8 +42,13 @@ class Action extends React.Component {
 // CHALLENGE1: create options component 
 // EVENTS AND METHODS CHALLENGE: Add remove all button and then setup handleRemoveAll
 class Options extends React.Component {
+    constructor(props){
+        super(props);
+        this.handleRemoveAll = this.handleRemoveAll.bind(this);
+    }
     handleRemoveAll(){
-        alert('removed');
+        console.log(this.props.options); 
+        //alert('removed');
     }
     render () {
         return(
