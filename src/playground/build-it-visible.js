@@ -1,7 +1,62 @@
 console.log('build-it-visible.js is running');
 
+// CHALLENGE, build Visibility Toggle again, this time using components and states
 
-const app = {
+
+class VisibleApp extends React.Component {
+    render(){
+        return(
+            <div>
+                <h1> Visibility Toggle </h1>
+                <Toggle />
+            </div>
+        );
+    }
+}
+
+class Toggle extends React.Component {
+    constructor(props){
+        super(props);
+        this.displayMessage = this.displayMessage.bind(this);
+        this.state = {
+            text: 'There are some details you can now see!',
+            buttonText: 'Show Details',
+            toggle: false
+        }
+    }
+    displayMessage(){
+        this.setState((pastState) => {
+            if(!pastState.toggle){    
+                return{
+                    toggle: pastState.toggle = true,
+                    buttonText: pastState.buttonText = 'Hide Details',
+                }
+            }
+            else{
+                return{
+                    toggle: pastState.toggle = false,
+                    buttonText: pastState.buttonText = 'Show Details',
+                }
+            }
+        })
+    }
+
+    render(){
+        return(
+            <div>
+                <button onClick = {this.displayMessage}> {this.state.buttonText} </button>
+                {this.state.toggle &&(
+                    <p> {this.state.text} </p>
+                )}
+            </div>
+        );
+    }
+}
+
+
+ReactDOM.render(<VisibleApp/>, document.getElementById('app'));
+
+/*const app = {
     title: 'Visibility Toggle',
     toggle: false,
 };
@@ -33,4 +88,4 @@ const renderApp = () => {
 
 
 const appRoot = document.getElementById('app');
-renderApp();
+renderApp();*/
