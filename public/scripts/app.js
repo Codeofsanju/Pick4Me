@@ -18,8 +18,9 @@ var Pick4MeApp = function (_React$Component) {
 
         _this.handleRemoveAll = _this.handleRemoveAll.bind(_this);
         _this.handleAction = _this.handleAction.bind(_this);
+        _this.handleAddOption = _this.handleAddOption.bind(_this);
         _this.state = {
-            options: ['Thing 1', 'Thing 2', 'Things 3', 'Thing 5', 'Thing 6', 'Thing 7']
+            options: []
         };
         return _this;
     }
@@ -41,6 +42,23 @@ var Pick4MeApp = function (_React$Component) {
             alert(this.state.options[randomIndex]);
         }
     }, {
+        key: 'handleAddOption',
+        value: function handleAddOption(option) {
+            if (!option) {
+                // if form was empty
+                return 'Please enter a valid option';
+            } else if (this.state.options.indexOf(option) > -1) {
+                // returns index of option if it exists in options array. Return -1 if not
+                return 'This already exists in your options';
+            }
+
+            this.setState(function (prevState) {
+                return {
+                    options: prevState.options.concat(option) // makes new array that concats old array with the new option array
+                };
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
             var t1 = 'Pick4Me';
@@ -52,7 +70,7 @@ var Pick4MeApp = function (_React$Component) {
                 React.createElement(Header, { title: t1, subtitle: st1 }),
                 React.createElement(Action, { hasOptions: this.state.options.length > 0, handleAction: this.handleAction }),
                 React.createElement(Options, { options: this.state.options, handleRemoveAll: this.handleRemoveAll }),
-                React.createElement(AddOptions, null)
+                React.createElement(AddOptions, { handleAddOption: this.handleAddOption })
             );
         }
     }]);
@@ -207,10 +225,16 @@ var Option = function (_React$Component5) {
 var AddOptions = function (_React$Component6) {
     _inherits(AddOptions, _React$Component6);
 
-    function AddOptions() {
+    function AddOptions(props) {
         _classCallCheck(this, AddOptions);
 
-        return _possibleConstructorReturn(this, (AddOptions.__proto__ || Object.getPrototypeOf(AddOptions)).apply(this, arguments));
+        var _this6 = _possibleConstructorReturn(this, (AddOptions.__proto__ || Object.getPrototypeOf(AddOptions)).call(this, props));
+
+        _this6.handleFormSubmit = _this6.handleFormSubmit.bind(_this6);
+        _this6.state = {
+            error: undefined
+        };
+        return _this6;
     }
 
     _createClass(AddOptions, [{
@@ -219,10 +243,13 @@ var AddOptions = function (_React$Component6) {
             // add to options vector
             e.preventDefault();
             var option = e.target.elements.option.value.trim(); // .trim() removes all leading and ending whitespace. 
-            console.log(option);
-            if (option) {
-                alert(option);
-            }
+            //console.log(option);
+            var error = this.props.handleAddOption(option); // error will be one of the error return strings if a string is returned, else undefined and falsy
+            this.setState(function () {
+                return {
+                    error: error
+                };
+            });
         }
     }, {
         key: 'render',
@@ -230,6 +257,13 @@ var AddOptions = function (_React$Component6) {
             return React.createElement(
                 'div',
                 null,
+                this.state.error && React.createElement(
+                    'p',
+                    null,
+                    ' ',
+                    this.state.error,
+                    ' '
+                ),
                 React.createElement(
                     'form',
                     { onSubmit: this.handleFormSubmit },

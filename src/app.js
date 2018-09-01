@@ -3,8 +3,9 @@ class Pick4MeApp extends React.Component {
         super(props);
         this.handleRemoveAll = this.handleRemoveAll.bind(this);
         this.handleAction = this.handleAction.bind(this);
+        this.handleAddOption = this.handleAddOption.bind(this);
         this.state ={
-            options: ['Thing 1', 'Thing 2', 'Things 3', 'Thing 5', 'Thing 6', 'Thing 7'],
+            options: [],
         }; 
     }
     handleRemoveAll() {
@@ -18,6 +19,20 @@ class Pick4MeApp extends React.Component {
         const randomIndex = Math.floor(Math.random() * this.state.options.length);
         alert(this.state.options[randomIndex]);
     }
+    handleAddOption(option){
+        if(!option){ // if form was empty
+            return 'Please enter a valid option';
+        }
+        else if(this.state.options.indexOf(option) > -1){ // returns index of option if it exists in options array. Return -1 if not
+            return 'This already exists in your options';
+        }
+        
+        this.setState((prevState)=>{
+            return{
+                options: prevState.options.concat(option), // makes new array that concats old array with the new option array
+            };
+        });
+    }
     render() {
     const t1 = 'Pick4Me';
     const st1 = 'Let Us Choose!';
@@ -27,7 +42,7 @@ class Pick4MeApp extends React.Component {
                 <Header title = {t1} subtitle = {st1}/>
                 <Action hasOptions = {this.state.options.length > 0} handleAction = {this.handleAction}/>
                 <Options options = {this.state.options} handleRemoveAll = {this.handleRemoveAll}/>
-                <AddOptions />
+                <AddOptions handleAddOption = {this.handleAddOption} />
             </div>
         );
     }
@@ -95,18 +110,30 @@ class Option extends React.Component{ // individual option
 
 // AddOptions
 class AddOptions extends React.Component {
+    constructor(props){
+        super(props);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.state = {
+            error: undefined,
+        }
+    }
+
     handleFormSubmit(e){ // add to options vector
         e.preventDefault();
         const option = e.target.elements.option.value.trim(); // .trim() removes all leading and ending whitespace. 
-        console.log(option);
-        if(option){
-            alert(option);
-        }
+        //console.log(option);
+        const error = this.props.handleAddOption(option); // error will be one of the error return strings if a string is returned, else undefined and falsy
+        this.setState(()=>{
+            return{
+                error: error,
+            };
+        }); 
     }
 
     render(){
         return (
             <div>
+                {this.state.error && <p> {this.state.error} </p>} 
                 <form onSubmit = {this.handleFormSubmit}>
                     <input type = 'text' name = "option"/>
                     <button> Add Option </button>
