@@ -26,7 +26,7 @@ class Pick4MeApp extends React.Component {
         else if(this.state.options.indexOf(option) > -1){ // returns index of option if it exists in options array. Return -1 if not
             return 'This already exists in your options';
         }
-        
+        // else
         this.setState((prevState)=>{
             return{
                 options: prevState.options.concat(option), // makes new array that concats old array with the new option array
@@ -60,7 +60,6 @@ class Header extends React.Component { // must use uppercase for class name
 }
 
 class Action extends React.Component { // random pick button (disbaled when options array is empty)
-
     render(){
         return (
             <div>
@@ -78,7 +77,6 @@ class Action extends React.Component { // random pick button (disbaled when opti
 // CHALLENGE1: create options component 
 // EVENTS AND METHODS CHALLENGE: Add remove all button and then setup handleRemoveAll
 class Options extends React.Component { // list of options, remove all options button
-
     render () {
         return(
             <div>
@@ -117,7 +115,6 @@ class AddOptions extends React.Component {
             error: undefined,
         }
     }
-
     handleFormSubmit(e){ // add to options vector
         e.preventDefault();
         const option = e.target.elements.option.value.trim(); // .trim() removes all leading and ending whitespace. 
@@ -129,7 +126,6 @@ class AddOptions extends React.Component {
             };
         }); 
     }
-
     render(){
         return (
             <div>

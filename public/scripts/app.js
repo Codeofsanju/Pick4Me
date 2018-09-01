@@ -51,7 +51,7 @@ var Pick4MeApp = function (_React$Component) {
                 // returns index of option if it exists in options array. Return -1 if not
                 return 'This already exists in your options';
             }
-
+            // else
             this.setState(function (prevState) {
                 return {
                     options: prevState.options.concat(option) // makes new array that concats old array with the new option array
@@ -128,7 +128,6 @@ var Action = function (_React$Component3) {
     _createClass(Action, [{
         key: 'render',
         // random pick button (disbaled when options array is empty)
-
         value: function render() {
             return React.createElement(
                 'div',
@@ -164,7 +163,6 @@ var Options = function (_React$Component4) {
     _createClass(Options, [{
         key: 'render',
         // list of options, remove all options button
-
         value: function render() {
             return React.createElement(
                 'div',
