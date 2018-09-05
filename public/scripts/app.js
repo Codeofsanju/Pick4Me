@@ -67,10 +67,20 @@ var Pick4MeApp = function (_React$Component) {
             return React.createElement(
                 'div',
                 null,
-                React.createElement(Header, { title: t1, subtitle: st1 }),
-                React.createElement(Action, { hasOptions: this.state.options.length > 0, handleAction: this.handleAction }),
-                React.createElement(Options, { options: this.state.options, handleRemoveAll: this.handleRemoveAll }),
-                React.createElement(AddOptions, { handleAddOption: this.handleAddOption })
+                React.createElement(Header, { title: t1,
+                    subtitle: st1
+                }),
+                React.createElement(Action, {
+                    hasOptions: this.state.options.length > 0,
+                    handleAction: this.handleAction
+                }),
+                React.createElement(Options, {
+                    options: this.state.options,
+                    handleRemoveAll: this.handleRemoveAll
+                }),
+                React.createElement(AddOptions, {
+                    handleAddOption: this.handleAddOption
+                })
             );
         }
     }]);

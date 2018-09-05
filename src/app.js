@@ -39,10 +39,20 @@ class Pick4MeApp extends React.Component {
     //const optns = ['Thing one', 'Thing two', 'Thing three'];
         return (
             <div>
-                <Header title = {t1} subtitle = {st1}/>
-                <Action hasOptions = {this.state.options.length > 0} handleAction = {this.handleAction}/>
-                <Options options = {this.state.options} handleRemoveAll = {this.handleRemoveAll}/>
-                <AddOptions handleAddOption = {this.handleAddOption} />
+                <Header title = {t1} 
+                    subtitle = {st1}
+                />
+                <Action 
+                    hasOptions = {this.state.options.length > 0} 
+                    handleAction = {this.handleAction}
+                />
+                <Options 
+                options = {this.state.options} 
+                handleRemoveAll = {this.handleRemoveAll}
+                />
+                <AddOptions 
+                handleAddOption = {this.handleAddOption} 
+                />
             </div>
         );
     }
