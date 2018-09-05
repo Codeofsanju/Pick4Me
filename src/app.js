@@ -58,62 +58,44 @@ class Pick4MeApp extends React.Component {
     }
 }
 
-class Header extends React.Component { // must use uppercase for class name
-    render(){// required to be defined in react components
-        return (
-            <div>
-                <h1> {this.props.title} </h1>
-                <h2> {this.props.subtitle} </h2>
-            </div>
-        );
-    } 
+const Header = (props)=>{
+    return(
+        <div>
+            <h1> {props.title} </h1>
+            <h2> {props.subtitle} </h2>
+        </div>
+    );
 }
 
-class Action extends React.Component { // random pick button (disbaled when options array is empty)
-    render(){
-        return (
-            <div>
-                <button 
-                    onClick={this.props.handleAction}
-                    disabled = {!this.props.hasOptions}
-                > 
-                What Should I do?
-                </button>
-            </div>
-        );
-    }
+const Action = (props) => { // STATELESS FUNCTIONAL COMPONENT - random pick button (disbaled when options array is empty)
+    return(
+        <div>
+            <button
+                onClick={props.handleAction}
+                disabled={!props.hasOptions}>
+                What Should I do?  
+            </button>
+        </div>
+    );
 }
 
-// CHALLENGE1: create options component 
-// EVENTS AND METHODS CHALLENGE: Add remove all button and then setup handleRemoveAll
-class Options extends React.Component { // list of options, remove all options button
-    render () {
-        return(
-            <div>
-            <button onClick = {this.props.handleRemoveAll}> Remove All </button>
-                {
-                    this.props.options.map((option) => <Option key ={option} optionText = {option} />) // for each element in options array, an individual option component is rendered
-                }
-            </div>
-        );
-    }
+const Options = (props) => {
+    return(
+        <div>
+        <button onClick = {props.handleRemoveAll}> Remove All </button>
+            {
+                props.options.map((option) => <Option key ={option} optionText = {option} />) // for each element in options array, an individual option component is rendered
+            }
+        </div>
+    );
 }
 
-
-
-// Challenge 2: Setup options prop for Options component.
-// Render length of array.
-
-
-
-class Option extends React.Component{ // individual option
-    render(){
-        return(
-            <div>
-                <p key = {this.props.option}> Option: {this.props.optionText} </p> 
-            </div>
-        );
-    }
+const Option = (props) => {
+    return (
+        <div>
+            <p key = {props.option}> Option: {props.optionText} </p> 
+        </div>
+    );
 }
 
 // AddOptions
@@ -148,6 +130,8 @@ class AddOptions extends React.Component {
         );
     }
 }
+
+
 
 
 ReactDOM.render(<Pick4MeApp />, document.getElementById("app"));
