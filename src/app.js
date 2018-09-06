@@ -5,7 +5,7 @@ class Pick4MeApp extends React.Component {
         this.handleAction = this.handleAction.bind(this);
         this.handleAddOption = this.handleAddOption.bind(this);
         this.state ={
-            options: [],
+            options: props.options,
         }; 
     }
     handleRemoveAll() {
@@ -34,13 +34,10 @@ class Pick4MeApp extends React.Component {
         });
     }
     render() {
-    const t1 = 'Pick4Me';
     const st1 = 'Let Us Choose!';
-    //const optns = ['Thing one', 'Thing two', 'Thing three'];
         return (
             <div>
-                <Header title = {t1} 
-                    subtitle = {st1}
+                <Header subtitle = {st1}
                 />
                 <Action 
                     hasOptions = {this.state.options.length > 0} 
@@ -57,15 +54,21 @@ class Pick4MeApp extends React.Component {
         );
     }
 }
+Pick4MeApp.defaultProps = {
+    options: [],
+};
 
 const Header = (props)=>{
     return(
         <div>
             <h1> {props.title} </h1>
-            <h2> {props.subtitle} </h2>
+            {props.subtitle && <h2> {props.subtitle} </h2>}
         </div>
     );
 }
+Header.defaultProps = {
+    title: 'Pick4Me',
+};
 
 const Action = (props) => { // STATELESS FUNCTIONAL COMPONENT - random pick button (disbaled when options array is empty)
     return(
@@ -134,4 +137,4 @@ class AddOptions extends React.Component {
 
 
 
-ReactDOM.render(<Pick4MeApp />, document.getElementById("app"));
+ReactDOM.render(<Pick4MeApp options = {['someOptions1', 'someOptions2']}/>, document.getElementById("app"));
