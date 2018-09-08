@@ -17,6 +17,16 @@ class Pick4MeApp extends React.Component {
         });
     }*/
     
+    //LIFECYCLE METHODS
+    componentDidMount(){
+        console.log('Fetching Data');
+    }
+    componentDidUpdate(prevState, prevProps) {
+        console.log('Saving Data');
+    }
+    componentWillUnmount(){
+        console.log('ComponentWillUnmount');
+    }
     // Implicit call to set state
     handleRemoveAll() {this.setState(() => ({options: []}))}
     handleRemoveOneOption(optionToRemove){

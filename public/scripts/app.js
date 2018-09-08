@@ -33,10 +33,27 @@ var Pick4MeApp = function (_React$Component) {
         });
     }*/
 
-    // Implicit call to set state
+    //LIFECYCLE METHODS
 
 
     _createClass(Pick4MeApp, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            console.log('Fetching Data');
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevState, prevProps) {
+            console.log('Saving Data');
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            console.log('ComponentWillUnmount');
+        }
+        // Implicit call to set state
+
+    }, {
         key: 'handleRemoveAll',
         value: function handleRemoveAll() {
             this.setState(function () {
