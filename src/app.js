@@ -8,13 +8,16 @@ class Pick4MeApp extends React.Component {
             options: props.options,
         }; 
     }
-    handleRemoveAll() {
+    /*handleRemoveAll() {
         this.setState(()=>{
             return{
                 options: [],
             };
         });
-    }
+    }*/
+    
+    // Implicit call to set state
+    handleRemoveAll() {this.setState(() => ({options: []}))}
     handleAction(){ // randomly select ine thing from list
         const randomIndex = Math.floor(Math.random() * this.state.options.length);
         alert(this.state.options[randomIndex]);
@@ -26,12 +29,9 @@ class Pick4MeApp extends React.Component {
         else if(this.state.options.indexOf(option) > -1){ // returns index of option if it exists in options array. Return -1 if not
             return 'This already exists in your options';
         }
-        // else
-        this.setState((prevState)=>{
-            return{
-                options: prevState.options.concat(option), // makes new array that concats old array with the new option array
-            };
-        });
+
+        //else
+        this.setState((prevState)=> ({options: prevState.options.concat(option)}))
     }
     render() {
     const st1 = 'Let Us Choose!';
@@ -115,11 +115,8 @@ class AddOptions extends React.Component {
         const option = e.target.elements.option.value.trim(); // .trim() removes all leading and ending whitespace. 
         //console.log(option);
         const error = this.props.handleAddOption(option); // error will be one of the error return strings if a string is returned, else undefined and falsy
-        this.setState(()=>{
-            return{
-                error: error,
-            };
-        }); 
+
+        this.setState(() => ({error: error})) 
     }
     render(){
         return (
@@ -137,4 +134,4 @@ class AddOptions extends React.Component {
 
 
 
-ReactDOM.render(<Pick4MeApp options = {['someOptions1', 'someOptions2']}/>, document.getElementById("app"));
+ReactDOM.render(<Pick4MeApp />, document.getElementById("app"));

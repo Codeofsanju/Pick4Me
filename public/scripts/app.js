@@ -8,50 +8,191 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// Using Component State
-var CounterApp = function (_React$Component) {
-    _inherits(CounterApp, _React$Component);
+var Pick4MeApp = function (_React$Component) {
+    _inherits(Pick4MeApp, _React$Component);
 
-    function CounterApp(props) {
-        _classCallCheck(this, CounterApp);
+    function Pick4MeApp(props) {
+        _classCallCheck(this, Pick4MeApp);
 
-        var _this = _possibleConstructorReturn(this, (CounterApp.__proto__ || Object.getPrototypeOf(CounterApp)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (Pick4MeApp.__proto__ || Object.getPrototypeOf(Pick4MeApp)).call(this, props));
 
-        _this.handleReset = _this.handleReset.bind(_this);
-        _this.handleAddOne = _this.handleAddOne.bind(_this);
-        _this.handleMinusOne = _this.handleMinusOne.bind(_this);
-
+        _this.handleRemoveAll = _this.handleRemoveAll.bind(_this);
+        _this.handleAction = _this.handleAction.bind(_this);
+        _this.handleAddOption = _this.handleAddOption.bind(_this);
         _this.state = {
-            count: props.count
+            options: props.options
         };
         return _this;
     }
+    /*handleRemoveAll() {
+        this.setState(()=>{
+            return{
+                options: [],
+            };
+        });
+    }*/
 
-    _createClass(CounterApp, [{
-        key: 'handleAddOne',
-        value: function handleAddOne() {
-            this.setState(function (prevState) {
-                return {
-                    count: prevState.count + 1
-                };
-            });
-        }
-    }, {
-        key: 'handleMinusOne',
-        value: function handleMinusOne() {
-            this.setState(function (prevState) {
-                return {
-                    count: prevState.count - 1
-                };
-            });
-        }
-    }, {
-        key: 'handleReset',
-        value: function handleReset() {
+    // Implicit call to set state
+
+
+    _createClass(Pick4MeApp, [{
+        key: 'handleRemoveAll',
+        value: function handleRemoveAll() {
             this.setState(function () {
-                return {
-                    count: 0
-                };
+                return { options: [] };
+            });
+        }
+    }, {
+        key: 'handleAction',
+        value: function handleAction() {
+            // randomly select ine thing from list
+            var randomIndex = Math.floor(Math.random() * this.state.options.length);
+            alert(this.state.options[randomIndex]);
+        }
+    }, {
+        key: 'handleAddOption',
+        value: function handleAddOption(option) {
+            if (!option) {
+                // if form was empty
+                return 'Please enter a valid option';
+            } else if (this.state.options.indexOf(option) > -1) {
+                // returns index of option if it exists in options array. Return -1 if not
+                return 'This already exists in your options';
+            }
+
+            //else
+            this.setState(function (prevState) {
+                return { options: prevState.options.concat(option) };
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var st1 = 'Let Us Choose!';
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(Header, { subtitle: st1
+                }),
+                React.createElement(Action, {
+                    hasOptions: this.state.options.length > 0,
+                    handleAction: this.handleAction
+                }),
+                React.createElement(Options, {
+                    options: this.state.options,
+                    handleRemoveAll: this.handleRemoveAll
+                }),
+                React.createElement(AddOptions, {
+                    handleAddOption: this.handleAddOption
+                })
+            );
+        }
+    }]);
+
+    return Pick4MeApp;
+}(React.Component);
+
+Pick4MeApp.defaultProps = {
+    options: []
+};
+
+var Header = function Header(props) {
+    return React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'h1',
+            null,
+            ' ',
+            props.title,
+            ' '
+        ),
+        props.subtitle && React.createElement(
+            'h2',
+            null,
+            ' ',
+            props.subtitle,
+            ' '
+        )
+    );
+};
+Header.defaultProps = {
+    title: 'Pick4Me'
+};
+
+var Action = function Action(props) {
+    // STATELESS FUNCTIONAL COMPONENT - random pick button (disbaled when options array is empty)
+    return React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'button',
+            {
+                onClick: props.handleAction,
+                disabled: !props.hasOptions },
+            'What Should I do?'
+        )
+    );
+};
+
+var Options = function Options(props) {
+    return React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'button',
+            { onClick: props.handleRemoveAll },
+            ' Remove All '
+        ),
+        props.options.map(function (option) {
+            return React.createElement(Option, { key: option, optionText: option });
+        }) // for each element in options array, an individual option component is rendered
+
+    );
+};
+
+var Option = function Option(props) {
+    return React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'p',
+            { key: props.option },
+            ' Option: ',
+            props.optionText,
+            ' '
+        )
+    );
+};
+
+// AddOptions
+
+var AddOptions = function (_React$Component2) {
+    _inherits(AddOptions, _React$Component2);
+
+    function AddOptions(props) {
+        _classCallCheck(this, AddOptions);
+
+        var _this2 = _possibleConstructorReturn(this, (AddOptions.__proto__ || Object.getPrototypeOf(AddOptions)).call(this, props));
+
+        _this2.handleFormSubmit = _this2.handleFormSubmit.bind(_this2);
+        _this2.state = {
+            error: undefined
+        };
+        return _this2;
+    }
+
+    _createClass(AddOptions, [{
+        key: 'handleFormSubmit',
+        value: function handleFormSubmit(e) {
+            // add to options vector
+            e.preventDefault();
+            var option = e.target.elements.option.value.trim(); // .trim() removes all leading and ending whitespace. 
+            //console.log(option);
+            var error = this.props.handleAddOption(option); // error will be one of the error return strings if a string is returned, else undefined and falsy
+
+            this.setState(function () {
+                return { error: error };
             });
         }
     }, {
@@ -60,80 +201,28 @@ var CounterApp = function (_React$Component) {
             return React.createElement(
                 'div',
                 null,
-                React.createElement(
-                    'h1',
+                this.state.error && React.createElement(
+                    'p',
                     null,
-                    ' Count: ',
-                    this.state.count
+                    ' ',
+                    this.state.error,
+                    ' '
                 ),
                 React.createElement(
-                    'button',
-                    { onClick: this.handleAddOne },
-                    '+1'
-                ),
-                React.createElement(
-                    'button',
-                    { onClick: this.handleMinusOne },
-                    '-1'
-                ),
-                React.createElement(
-                    'button',
-                    { onClick: this.handleReset },
-                    'Reset'
+                    'form',
+                    { onSubmit: this.handleFormSubmit },
+                    React.createElement('input', { type: 'text', name: 'option' }),
+                    React.createElement(
+                        'button',
+                        null,
+                        ' Add Option '
+                    )
                 )
             );
         }
     }]);
 
-    return CounterApp;
+    return AddOptions;
 }(React.Component);
 
-CounterApp.defaultProps = {
-    count: 0
-};
-ReactDOM.render(React.createElement(CounterApp, null), document.getElementById('app'));
-
-// EVENTS AND EVENT HANDLERS
-/*let count = 0;
-const add1 = () => {
-    console.log('add1');
-};
-
-const templateTwo = (
-    <div>
-        <h1> Count: {count} </h1>
-        <button onClick={add1} className="button"> +1 </button>
-    </div>
-);
-
-// Events Challenge 1
-// Make a button with the text -1. Only console.log for now.
-// Setup minusOne functions
-// Setup reset button
-let count1 = 10;
-let initial = count1;
-const add2 = () => {
-    count1++;
-    renderCounterApp();
-};
-const minus = () => {
-    count1--;
-    renderCounterApp();
-};
-const reset = () => {
-    count1 = initial;
-    renderCounterApp();
-};
-
-const renderCounterApp = () =>{
-    const templateThree = (
-        <div>
-            <h1> Count: {count1} </h1>
-            <button onClick= {add2} className="button"> +1 </button>
-            <button onClick = {minus} className="button"> -1 </button>
-            <button onClick = {reset} className="button"> reset </button>
-        </div>
-    );
-    ReactDOM.render(templateThree, appRoot);
-};
-renderCounterApp();*/
+ReactDOM.render(React.createElement(Pick4MeApp, null), document.getElementById("app"));
