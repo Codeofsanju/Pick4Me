@@ -4,6 +4,7 @@ class Pick4MeApp extends React.Component {
         this.handleRemoveAll = this.handleRemoveAll.bind(this);
         this.handleAction = this.handleAction.bind(this);
         this.handleAddOption = this.handleAddOption.bind(this);
+        this.handleRemoveOneOption = this.handleRemoveOneOption.bind(this);
         this.state ={
             options: props.options,
         }; 
@@ -18,6 +19,15 @@ class Pick4MeApp extends React.Component {
     
     // Implicit call to set state
     handleRemoveAll() {this.setState(() => ({options: []}))}
+    handleRemoveOneOption(optionToRemove){
+        this.setState((prevState) => ({
+            options: prevState.options.filter((option)=> { // filter goes through the option array looking for a value. 
+                //return optionToRemove === option; // if optionToRemove is found, true is returned and everything else is removed accept the found item
+                return optionToRemove !== option; // if optionToRemove is found, false is returned and filter removes this item and everything else stays
+            })
+        }));
+    }
+
     handleAction(){ // randomly select ine thing from list
         const randomIndex = Math.floor(Math.random() * this.state.options.length);
         alert(this.state.options[randomIndex]);
@@ -46,6 +56,7 @@ class Pick4MeApp extends React.Component {
                 <Options 
                 options = {this.state.options} 
                 handleRemoveAll = {this.handleRemoveAll}
+                handleRemoveOneOption = {this.handleRemoveOneOption}
                 />
                 <AddOptions 
                 handleAddOption = {this.handleAddOption} 
@@ -54,6 +65,9 @@ class Pick4MeApp extends React.Component {
         );
     }
 }
+
+
+
 Pick4MeApp.defaultProps = {
     options: [],
 };
@@ -87,7 +101,7 @@ const Options = (props) => {
         <div>
         <button onClick = {props.handleRemoveAll}> Remove All </button>
             {
-                props.options.map((option) => <Option key ={option} optionText = {option} />) // for each element in options array, an individual option component is rendered
+                props.options.map((option) => <Option key ={option} optionText = {option} handleRemoveOneOption = {props.handleRemoveOneOption} />) // for each element in options array, an individual option component is rendered
             }
         </div>
     );
@@ -96,7 +110,12 @@ const Options = (props) => {
 const Option = (props) => {
     return (
         <div>
-            <p key = {props.option}> Option: {props.optionText} </p> 
+            {props.optionText}
+            <button 
+                onClick = {(e) => {
+                    props.handleRemoveOneOption(props.optionText);
+                }}
+            > Remove </button> 
         </div>
     );
 }

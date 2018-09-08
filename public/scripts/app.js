@@ -19,6 +19,7 @@ var Pick4MeApp = function (_React$Component) {
         _this.handleRemoveAll = _this.handleRemoveAll.bind(_this);
         _this.handleAction = _this.handleAction.bind(_this);
         _this.handleAddOption = _this.handleAddOption.bind(_this);
+        _this.handleRemoveOneOption = _this.handleRemoveOneOption.bind(_this);
         _this.state = {
             options: props.options
         };
@@ -40,6 +41,19 @@ var Pick4MeApp = function (_React$Component) {
         value: function handleRemoveAll() {
             this.setState(function () {
                 return { options: [] };
+            });
+        }
+    }, {
+        key: 'handleRemoveOneOption',
+        value: function handleRemoveOneOption(optionToRemove) {
+            this.setState(function (prevState) {
+                return {
+                    options: prevState.options.filter(function (option) {
+                        // filter goes through the option array looking for a value. 
+                        //return optionToRemove === option; // if optionToRemove is found, true is returned and everything else is removed accept the found item
+                        return optionToRemove !== option; // if optionToRemove is found, false is returned and filter removes this item and everything else stays
+                    })
+                };
             });
         }
     }, {
@@ -80,7 +94,8 @@ var Pick4MeApp = function (_React$Component) {
                 }),
                 React.createElement(Options, {
                     options: this.state.options,
-                    handleRemoveAll: this.handleRemoveAll
+                    handleRemoveAll: this.handleRemoveAll,
+                    handleRemoveOneOption: this.handleRemoveOneOption
                 }),
                 React.createElement(AddOptions, {
                     handleAddOption: this.handleAddOption
@@ -145,7 +160,7 @@ var Options = function Options(props) {
             ' Remove All '
         ),
         props.options.map(function (option) {
-            return React.createElement(Option, { key: option, optionText: option });
+            return React.createElement(Option, { key: option, optionText: option, handleRemoveOneOption: props.handleRemoveOneOption });
         }) // for each element in options array, an individual option component is rendered
 
     );
@@ -155,12 +170,15 @@ var Option = function Option(props) {
     return React.createElement(
         'div',
         null,
+        props.optionText,
         React.createElement(
-            'p',
-            { key: props.option },
-            ' Option: ',
-            props.optionText,
-            ' '
+            'button',
+            {
+                onClick: function onClick(e) {
+                    props.handleRemoveOneOption(props.optionText);
+                }
+            },
+            ' Remove '
         )
     );
 };
