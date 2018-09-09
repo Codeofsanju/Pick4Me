@@ -6,7 +6,7 @@ class Pick4MeApp extends React.Component {
         this.handleAddOption = this.handleAddOption.bind(this);
         this.handleRemoveOneOption = this.handleRemoveOneOption.bind(this);
         this.state ={
-            options: props.options,
+            options: [],
         }; 
     }
 
@@ -91,9 +91,6 @@ class Pick4MeApp extends React.Component {
     }
 }
 
-Pick4MeApp.defaultProps = {
-    options: [],
-};
 
 const Header = (props)=>{
     return(
