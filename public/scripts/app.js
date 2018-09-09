@@ -25,13 +25,6 @@ var Pick4MeApp = function (_React$Component) {
         };
         return _this;
     }
-    /*handleRemoveAll() {
-        this.setState(()=>{
-            return{
-                options: [],
-            };
-        });
-    }*/
 
     //LIFECYCLE METHODS
 
@@ -39,18 +32,40 @@ var Pick4MeApp = function (_React$Component) {
     _createClass(Pick4MeApp, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            console.log('Fetching Data');
+            try {
+                var json = localStorage.getItem('options');
+                var options = JSON.parse(json);
+                if (options) {
+                    this.setState(function () {
+                        return { options: options };
+                    });
+                }
+            } catch (e) {
+                //do  nothing
+            }
         }
     }, {
         key: 'componentDidUpdate',
-        value: function componentDidUpdate(prevState, prevProps) {
-            console.log('Saving Data');
+        value: function componentDidUpdate(prevProps, prevState) {
+            if (prevState.options.length !== this.state.options.length) {
+                var json = JSON.stringify(this.state.options);
+                localStorage.setItem('options', json);
+            }
         }
     }, {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {
             console.log('ComponentWillUnmount');
         }
+
+        /*handleRemoveAll() {
+            this.setState(()=>{
+                return{
+                    options: [],
+                };
+            });
+        }*/
+
         // Implicit call to set state
 
     }, {
@@ -171,10 +186,18 @@ var Options = function Options(props) {
     return React.createElement(
         'div',
         null,
+        props.options.length === 0 && React.createElement(
+            'p',
+            null,
+            ' Please add an options to get started '
+        ),
         React.createElement(
             'button',
-            { onClick: props.handleRemoveAll },
-            ' Remove All '
+            {
+                onClick: props.handleRemoveAll,
+                disabled: props.options.length === 0
+            },
+            'Remove All '
         ),
         props.options.map(function (option) {
             return React.createElement(Option, { key: option, optionText: option, handleRemoveOneOption: props.handleRemoveOneOption });
@@ -229,6 +252,11 @@ var AddOptions = function (_React$Component2) {
             this.setState(function () {
                 return { error: error };
             });
+
+            if (!error) {
+                // if no error, clear input field
+                e.target.elements.option.value = '';
+            }
         }
     }, {
         key: 'render',

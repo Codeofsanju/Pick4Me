@@ -9,6 +9,29 @@ class Pick4MeApp extends React.Component {
             options: props.options,
         }; 
     }
+
+    //LIFECYCLE METHODS
+    componentDidMount(){
+        try{
+            const json = localStorage.getItem('options');
+            const options = JSON.parse(json);
+            if(options){
+                this.setState(()=> ({options: options}))
+            }
+        } catch(e){
+            //do  nothing
+        }
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.options.length !== this.state.options.length){
+            const json = JSON.stringify(this.state.options);
+            localStorage.setItem('options',json);
+        }
+    }
+    componentWillUnmount(){
+        console.log('ComponentWillUnmount');
+    }
+
     /*handleRemoveAll() {
         this.setState(()=>{
             return{
@@ -17,18 +40,10 @@ class Pick4MeApp extends React.Component {
         });
     }*/
     
-    //LIFECYCLE METHODS
-    componentDidMount(){
-        console.log('Fetching Data');
-    }
-    componentDidUpdate(prevState, prevProps) {
-        console.log('Saving Data');
-    }
-    componentWillUnmount(){
-        console.log('ComponentWillUnmount');
-    }
     // Implicit call to set state
-    handleRemoveAll() {this.setState(() => ({options: []}))}
+    handleRemoveAll() {
+        this.setState(()=> ({ options: [] }));
+    }
     handleRemoveOneOption(optionToRemove){
         this.setState((prevState) => ({
             options: prevState.options.filter((option)=> { // filter goes through the option array looking for a value. 
@@ -76,8 +91,6 @@ class Pick4MeApp extends React.Component {
     }
 }
 
-
-
 Pick4MeApp.defaultProps = {
     options: [],
 };
@@ -109,9 +122,16 @@ const Action = (props) => { // STATELESS FUNCTIONAL COMPONENT - random pick butt
 const Options = (props) => {
     return(
         <div>
-        <button onClick = {props.handleRemoveAll}> Remove All </button>
+            {props.options.length === 0 && <p> Please add an options to get started </p>}
+            
+            <button 
+                onClick = {props.handleRemoveAll}
+                disabled = {props.options.length === 0}    
+            > 
+            Remove All </button>
+            
             {
-                props.options.map((option) => <Option key ={option} optionText = {option} handleRemoveOneOption = {props.handleRemoveOneOption} />) // for each element in options array, an individual option component is rendered
+                    props.options.map((option) => <Option key ={option} optionText = {option} handleRemoveOneOption = {props.handleRemoveOneOption} />) // for each element in options array, an individual option component is rendered
             }
         </div>
     );
@@ -146,6 +166,10 @@ class AddOptions extends React.Component {
         const error = this.props.handleAddOption(option); // error will be one of the error return strings if a string is returned, else undefined and falsy
 
         this.setState(() => ({error: error})) 
+        
+        if(!error){ // if no error, clear input field
+            e.target.elements.option.value = ''; 
+        }
     }
     render(){
         return (
