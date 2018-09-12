@@ -1,14 +1,7 @@
-//import './utils.js';
+// install -> import -> use 
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import subtract, { square, add } from './utils.js';
+const template = <p> test </p>;
 
-console.log(square(4));
-console.log(add(2,4))
-console.log(subtract(100,20));
-
-
-// ES6 IMPORT AND EXPORT CHALLENGE: set up another file called person.js
-// setup a named export isAdult(18) - true if adult, otherwise false
-// setup a named export canDrink(21) - true if 21 and over, otherwise false
-//import {isAdult, canDrink} from './person.js';
-//console.log(isAdult(18), canDrink(21));
+ReactDOM.render(template, document.getElementById('app'));
