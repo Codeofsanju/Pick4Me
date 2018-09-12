@@ -69,37 +69,39 @@
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__person_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_js__ = __webpack_require__(1);
 //import './utils.js';
 
-//import { square } from './utils.js';
 
-//console.log(square(4));
-//console.log('app.js is running');
+
+console.log(__WEBPACK_IMPORTED_MODULE_0__utils_js__["c" /* square */](4));
+console.log(__WEBPACK_IMPORTED_MODULE_0__utils_js__["a" /* add */](2,4))
+console.log(__WEBPACK_IMPORTED_MODULE_0__utils_js__["b" /* default */](100,20));
 
 
 // ES6 IMPORT AND EXPORT CHALLENGE: set up another file called person.js
 // setup a named export isAdult(18) - true if adult, otherwise false
 // setup a named export canDrink(21) - true if 21 and over, otherwise false
-
-console.log(__WEBPACK_IMPORTED_MODULE_0__person_js__["b" /* isAdult */](18), __WEBPACK_IMPORTED_MODULE_0__person_js__["a" /* canDrink */](21));
+//import {isAdult, canDrink} from './person.js';
+//console.log(isAdult(18), canDrink(21));
 
 /***/ }),
-/* 1 */,
-/* 2 */
+/* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return isAdult; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return canDrink; });
-// ES6 IMPORT AND EXPORT CHALLENGE: set up another file called person.js
-// setup a named export isAdult(18) - true if adult, otherwise false
-// setup a named export canDrink(21) - true if 21 and over, otherwise false
+console.log('utils.js is running');
 
-const isAdult = (age) => age>17 &&true; // or age >= 18
-const canDrink = (age) => age>20 &&true; // or age >= 21
+const square = (x) => x*x;
+/* harmony export (immutable) */ __webpack_exports__["c"] = square;
+
+const add = (x,y) => x+y;
+/* harmony export (immutable) */ __webpack_exports__["a"] = add;
 
 
+/* harmony default export */ __webpack_exports__["b"] = ((x,y) => x-y);
+
+//export { square, add, subtract as default };
 
 /***/ })
 /******/ ]);
