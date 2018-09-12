@@ -65,9 +65,41 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-console.log('app.js is runningishish');
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__person_js__ = __webpack_require__(2);
+//import './utils.js';
+
+//import { square } from './utils.js';
+
+//console.log(square(4));
+//console.log('app.js is running');
+
+
+// ES6 IMPORT AND EXPORT CHALLENGE: set up another file called person.js
+// setup a named export isAdult(18) - true if adult, otherwise false
+// setup a named export canDrink(21) - true if 21 and over, otherwise false
+
+console.log(__WEBPACK_IMPORTED_MODULE_0__person_js__["b" /* isAdult */](18), __WEBPACK_IMPORTED_MODULE_0__person_js__["a" /* canDrink */](21));
+
+/***/ }),
+/* 1 */,
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return isAdult; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return canDrink; });
+// ES6 IMPORT AND EXPORT CHALLENGE: set up another file called person.js
+// setup a named export isAdult(18) - true if adult, otherwise false
+// setup a named export canDrink(21) - true if 21 and over, otherwise false
+
+const isAdult = (age) => age>17 &&true; // or age >= 18
+const canDrink = (age) => age>20 &&true; // or age >= 21
+
+
 
 /***/ })
 /******/ ]);
