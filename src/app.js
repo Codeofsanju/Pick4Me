@@ -1,7 +1,7 @@
 // install -> import -> use 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Pick4MeApp from './components/Pick4MeApp.js';
 
-const template = <p> THIS IS JSX FROM WEBPACK </p>;
 
-ReactDOM.render(template, document.getElementById('app'));
+ReactDOM.render(<Pick4MeApp />, document.getElementById("app"));
